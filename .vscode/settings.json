@@ -1,0 +1,14 @@
+{
+    "git.ignoreLimitWarning": true,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./My Project",
+        "-p",
+        "*test.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+    "editor.inlineSuggest.showToolbar": "onHover",
+    "pyqt-integration.qtdesigner.path": "c:\\Program Files (x86)\\Qt Designer\\designer.exe"
+}
