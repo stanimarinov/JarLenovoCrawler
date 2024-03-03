@@ -1,4 +1,4 @@
-"""Module: scraper"""
+"""Module Scraper"""
 
 import logging
 from bs4 import BeautifulSoup
@@ -15,7 +15,7 @@ class ScraperError(Exception):
 
 class Scraper:
     def __init__(self,html):
-        self.soup = BeautifulSoup(self.html,"html.parser")  
+        self.soup = BeautifulSoup(html,"html.parser")  
 
     def get_products_urls(self):
         products_urls = []
@@ -36,5 +36,4 @@ class Scraper:
                 href = a['href']
                 products_urls.append(href)
 
-        return products_urls
-         
+        return products_urls         
