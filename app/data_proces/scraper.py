@@ -1,17 +1,11 @@
 """Module Scraper"""
 
-import logging
 from bs4 import BeautifulSoup
+import logging
 
 format_str = '%(name)s:%(levelname)s:%(message)s'
 logging.basicConfig(format=format_str, level=logging.DEBUG)
 logger = logging.getLogger('scraper')
-
-class ScraperError(Exception):
-    """Custom exception for errors related to Scraper."""
-
-    def __init__(self, message: str):
-        super().__init__(message)
 
 class Scraper:
     def __init__(self,html):
@@ -21,19 +15,16 @@ class Scraper:
         products_urls = []
 
         logger.info('Start scraping data')
-        products_selector = "#product_list .sProduct .s2"
+        products_selector = "#product_list.p1 .s2"
 
         products = self.soup.select(products_selector)
         logger.debug('PRODUCTS: %s', products)
         for product in products:
             logger.debug('PRODUCT: %s', product)
-            # get brand
-            brand = product.select_one('.list_brand brand').text.strip()
+            brand = product.select_one(".list_brand.brand")
 
             if brand == 'Lenovo':
-                # get product link:
-                a = product.select_one('.long_title description>a')
+                a = product.select_one("a.brand-name")
                 href = a['href']
                 products_urls.append(href)
-
         return products_urls         
