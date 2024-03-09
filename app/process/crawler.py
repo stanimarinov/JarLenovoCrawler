@@ -8,17 +8,15 @@ logging.basicConfig(format=format_str, level=logging.INFO)
 logger = logging.getLogger('crawler')
 
 class Crawler:
-    """
-        Class retrieve HTML from a URL.
-        https://www.jarcomputers.com/laptopi-cat-2.html
-    """
+    """ https://www.jarcomputers.com/laptopi-cat-2.html """
+
     def __init__(self, url):
         self.url = url
         self.target_url = f'{self.url}'
 
     def get_html(self)->str:
-        """get request
-        """
+        """ get request """
+
         try:
             response = requests.get(self.target_url, timeout=8)
             if response.ok:
@@ -31,3 +29,9 @@ class Crawler:
         except requests.exceptions.RequestsException as e:
             logger.error(f"Failed to retrieve HTML from {self.target_url}:{e}")
             raise         
+
+if __name__=='__main__':
+    url = 'https://www.jarcomputers.com/Laptopi_cat_2.html'
+
+    crawler = Crawler(url)
+    crawler.get_html()        

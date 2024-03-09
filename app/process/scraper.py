@@ -2,12 +2,10 @@
 
 import logging
 from bs4 import BeautifulSoup
-from typing import List
 
-from app.setup_logging import setup_logger
-from app.types import LenovoData
-
-logger = setup_logger('scraper', logging.ERROR)
+format_str = '%(name)s:%(levelname)s:%(message)s'
+logging.basicConfig(format=format_str, level=logging.INFO)
+logger = logging.getLogger('crawler')
 
 
 class Scraper:
