@@ -9,11 +9,6 @@ from app.types import LenovoData
 
 logger = setup_logger('scraper', logging.ERROR)
 
-class ScraperError(Exception):
-    """ exception for errors to Scraper """
-
-    def __init__(self, message: str):
-        super().__init__(message)
 
 class Scraper:
     def __init__(self, html:str):
