@@ -13,20 +13,20 @@ class Scraper:
         self.html = html
         self.soup = BeautifulSoup(self.html, "html.parser")
 
-    def get_products_data(self): 
-        products_data = []       
+    
+    def get_products_urls(self):
+        products_urls = []
+
         logger.info('Start scraping data')
-        products = self.soup.select("#product_list .s2 .list_brand.brand .brand-name > a")
+        products = self.soup.select('#product_list .brand-name')
         logger.debug('PRODUCTS: %s', products)
-        
+
         for product in products:
-            logger.debug('PRODUCT: %s', product)
-            brand = product.select_one('.list_brand.brand')
-            if brand is not None:
-                brand_text = brand.text
-                if brand_text == 'Lenovo':
-                    a = product.select_one('.brand-name > a')               
-                    href = a['href']
-                    products_data.append(href)
-            
-        return products_data
+            brand = product.select_one('.brand-name>a')
+            logger.info('PRODUCT: %s', product)
+
+            if brand and brand.text == 'Lenovo':
+                href = product.find('a')['href']
+                products_urls.append(href)
+                
+        return products_urls

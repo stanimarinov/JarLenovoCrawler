@@ -13,4 +13,4 @@ if __name__=='__main__':
     html = crawler.get_html()
 
     scraper = Scraper(html)
-    scraper.get_products_data()
+    scraper.get_products_urls()
