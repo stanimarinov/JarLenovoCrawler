@@ -1,8 +1,9 @@
-""" module db.py """
+""" module db """
 
 import mysql.connector
 import configparser
 import os
+
 import logging
 
 format_str = '%(name)s:%(levelname)s:%(message)s'
@@ -11,23 +12,26 @@ logger = logging.getLogger('db')
 
 def db_connect(config_file = './config.ini'):
     config = configparser.ConfigParser()
-
+    config_file = './config.ini'
+        
+    
     if os.path.exists(config_file):
         config.read(config_file)
     else:
         raise FileNotFoundError
-
+    
     mysql_config = dict(config['mysql'])
     db = mysql.connector.connect(**mysql_config)
     return db
 
 def insert_list_of_dict(data, db):
     insert_query = """
-        INSERT INTO laptops (laptop_model, laptop_price, laptop_screen_size)
+        INSERT INTO laptops (model, price, screen_size)
         VALUES (%s, %s, %s)
     """
+
     data_as_lot = [
-        (d['laptop_model'], d['laptop_price'], d['laptop_screen_size'])
+        (d['model'], d['price'], d['screen_size'])
         for d in data
     ]
 
@@ -39,12 +43,23 @@ def insert_list_of_dict(data, db):
     except mysql.connector.Error as e:
         print(e)
 
+
 def main():
     laptops = [
         {
-            'laptop_model':'Lenovo',
-            'laptop_price': 1399,
-            'laptop_screen_size': 15.6
+            'model':'Legion',
+            'price': 2399,
+            'screen_size': 16
+        },
+        {
+            'model':'IdeaPad',
+            'price': 899,
+            'screen_size': 15.6
+        },
+        {
+            'model':'V15',
+            'price': 900,
+            'screen_size': 15.6
         }
     ]
 
@@ -55,8 +70,8 @@ def main():
         logger.error('Error: %s', e)
 
     logger.debug('Ready to inser data: %s', laptops)
-    print('Ready to insert data')
+    print('Ready to inser data')
     insert_list_of_dict(data = laptops, db=db)
 
 if __name__=='__main__':
-    main()        
+    main()
