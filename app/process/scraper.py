@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 format_str = '%(name)s:%(levelname)s:%(message)s'
 logging.basicConfig(format=format_str, level=logging.INFO)
-logger = logging.getLogger('crawler')
+logger = logging.getLogger('scraper')
 
 
 class Scraper:
