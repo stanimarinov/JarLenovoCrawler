@@ -28,7 +28,6 @@ def insert_list_of_dict(data, db):
         INSERT INTO laptops (model, price, screen_size)
         VALUES (%s, %s, %s)
     """
-
     data = [
         (d['model'], d['price'], d['screen_size'])
         for d in data
@@ -37,7 +36,7 @@ def insert_list_of_dict(data, db):
         with db.cursor(dictionary=True) as cursor:
             cursor.executemany(insert_query, data)
             logger.info('Data are inserted!')
-            logger.debug('data_as_lot: %s', data)
+            logger.debug('data: %s', data)
     except mysql.connector.Error as e:
         print(e)
 
@@ -66,9 +65,9 @@ def main():
     except FileNotFoundError as e:
         logger.error('Error: %s', e)
 
-    logger.debug('Ready to inser data: %s', laptops)
-    print('Ready to inser data')
-    insert_list_of_dict(data = laptops, db=db)
+    logger.debug('Ready to insert data: %s', laptops)
+    print('Ready to insert data')
+    insert_list_of_dict(data=laptops, db=db)
 
 if __name__=='__main__':
     main()
