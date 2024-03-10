@@ -3,7 +3,6 @@
 import mysql.connector
 import configparser
 import os
-
 import logging
 
 format_str = '%(name)s:%(levelname)s:%(message)s'
@@ -30,19 +29,17 @@ def insert_list_of_dict(data, db):
         VALUES (%s, %s, %s)
     """
 
-    data_as_lot = [
+    data = [
         (d['model'], d['price'], d['screen_size'])
         for d in data
     ]
-
     try:
         with db.cursor(dictionary=True) as cursor:
-            cursor.executemany(insert_query, data_as_lot)
+            cursor.executemany(insert_query, data)
             logger.info('Data are inserted!')
-            logger.debug('data_as_lot: %s', data_as_lot)
+            logger.debug('data_as_lot: %s', data)
     except mysql.connector.Error as e:
         print(e)
-
 
 def main():
     laptops = [
