@@ -6,12 +6,11 @@ from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
 
-from app.db.db import DB
-
-from app.setup_logging import setup_logger
 
 
-logger = setup_logger('data_table', logging.DEBUG)
+format_str = '%(name)s:%(levelname)s:%(message)s'
+logging.basicConfig(format=format_str, level=logging.DEBUG)
+logger = logging.getLogger('data_table')
 
 
 class TableView(qtw.QTableView):

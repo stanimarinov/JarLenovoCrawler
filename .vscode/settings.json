@@ -9,6 +9,6 @@
     ],
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": true,
-    "editor.inlineSuggest.showToolbar": "onHover",
+    "editor.inlineSuggest.showToolbar": "always",
     "pyqt-integration.qtdesigner.path": "c:\\Program Files (x86)\\Qt Designer\\designer.exe"
 }
